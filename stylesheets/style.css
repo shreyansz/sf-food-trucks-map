@@ -1,0 +1,7 @@
+  html, body { height: 98%; width:100%; margin: 0; padding: 0; }
+  #mainDiv   { padding-left: 40% }
+  small { font-size : 50%; }
+  #path { padding-left : 2%; }
+  #autocomp { width : 15%; }
+  #map-canvas { width: 100%; height: 88%; margin-top: 1%} 
+  .ui-autocomplete { width: 10%; }
