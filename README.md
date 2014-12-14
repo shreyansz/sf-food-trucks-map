@@ -17,7 +17,7 @@ Path: all (615) > coffee (89)
 ```
 Path: all (615)
 ```
-### Implementation
+### Technologies
 The application is built using HTML, CSS, JavaScript, jQuery, jQuery UI and [Google Maps Javascript API v3]. It wwas succesfully tested on Google Chrome v39 and Mozilla Firefox v33 web browsers.  
 ### Future Scope
  - Cross-browser compatibility
