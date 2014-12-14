@@ -1,5 +1,6 @@
 # SF Food Trucks Map
-SF Food Trucks Map is a web application that marks various food truck locations in San Francisco using data provided by [DataSF]. It also provides an autocomplete text box which enables user to filter results based on food truck applicant name or food items. 
+SF Food Trucks Map is a web application that marks various food truck locations in San Francisco using data provided by [DataSF]. It also provides an autocomplete text box which enables user to filter results based on food truck applicant name or food items.<br>
+This solution is a little different to the [Uber coding challenge], in that, it does not map food trucks near a specific location, but rather maps all food trucks in accordance with data provided by [DataSF]. Food truck locations were not provided based on user location, since the user might be outside San Francisco and the application obtains information only for San Francisco based food trucks. Finding closest food trucks based on user location is set as future scope. Food truck locations based on a given address within SF was also scrapped, since the user can easily figure that using the map and address validation would have been required. There were timing constraints too. It does have an option to filter results based on food truck aplicant's name or food items.  
 ### Version
 1.0.0
 ### Features
@@ -18,7 +19,7 @@ Path: all (615) > coffee (89)
 Path: all (615)
 ```
 ### Technologies
-The application is built using HTML, CSS, JavaScript, jQuery, jQuery UI and [Google Maps Javascript API v3]. It wwas succesfully tested on Google Chrome v39 and Mozilla Firefox v33 web browsers.  
+The application is built using HTML, CSS, JavaScript, jQuery, jQuery UI and [Google Maps Javascript API v3]. It was succesfully tested on Google Chrome v39, Mozilla Firefox v33 and Internet Explorer 10 web browsers.  
 ### Future Scope
  - Cross-browser compatibility
  - Responsive design
@@ -27,3 +28,4 @@ License
 MIT
 [DataSF]:https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat
 [Google Maps Javascript API v3]:https://developers.google.com/maps/documentation/javascript/
+[Uber coding challenge]: https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md
