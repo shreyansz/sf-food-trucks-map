@@ -2,7 +2,7 @@
  
 window.SF_lat      = 37.7603;
 window.SF_lng     = -122.4167;
-window.url            = "http://data.sfgov.org/resource/rqzj-sfat.json";
+window.url            = "//data.sfgov.org/resource/rqzj-sfat.json";
 		
 function main() 
 {
@@ -63,7 +63,7 @@ function main()
 				  position: ftLatLng,
 				  map: map,
 				  title: foodTruck.applicant,
-				  icon: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
+				  icon: "//maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					for (var iw=0; iw<infowindows.length; iw++) 
@@ -183,7 +183,7 @@ function main()
 						  			 position: myLatLng,
 						  			 map: map,
 						  			 title: "user Location",
-						  			 icon: "http://www.google.com/mapfiles/arrow.png"
+						  			 icon: "//www.google.com/mapfiles/arrow.png"
 									 });
 				}, 
 				function() 
