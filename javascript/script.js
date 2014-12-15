@@ -13,6 +13,7 @@ function main()
 	var autoCompleteArray = [];
 	var pathCount = 0;
 	var truckCount = 0;
+	var myLatLng;
 	//get JSON data
 	$.getJSON(url, function(data_json)
 	{ 
@@ -34,9 +35,11 @@ function main()
 	};
 	var map = new google.maps.Map(document.getElementById('map-canvas'),
 														   mapOptions);
+	setUserLocation();
 	
 	function populateMap()
-	{ 	truckCount = 0;
+	{ 	
+		truckCount = 0;
 		clearMarkersAndAutocomplete();
 		var jsonDataTemp = [];
 		var infowindows = [];
@@ -51,15 +54,16 @@ function main()
 		{ 
 			if( ( 1 > term.length ) || ( term === foodTruck.applicant ) || ( $.inArray(term, foodTruck.foodItemsArray) >= 0 ) )
 			{
-				var myLatLng = new google.maps.LatLng(foodTruck.latitude, foodTruck.longitude);
+				var ftLatLng = new google.maps.LatLng(foodTruck.latitude, foodTruck.longitude);
 				var infowindow = new google.maps.InfoWindow({
 				content: foodTruck.contentString
 				  });
 				infowindows.push(infowindow);
 				var marker = new google.maps.Marker({
-				  position: myLatLng,
+				  position: ftLatLng,
 				  map: map,
-				  title: foodTruck.applicant
+				  title: foodTruck.applicant,
+				  icon: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					for (var iw=0; iw<infowindows.length; iw++) 
@@ -84,6 +88,7 @@ function main()
 			},
 			select: function(event, ui)
 			{
+				$("#autocomp").val(ui.item.value);
 				setLink();
 			}
 		 });
@@ -158,9 +163,39 @@ function main()
 		foodTruck['foodItemsArray'] = undefined != value.fooditems ? value.fooditems.toLowerCase().split(": ") : [];
 		value.address    					= undefined != value.address    ? value.address 	  				 : "";
 		value.status       					= undefined != value.status       ? value.status        				 : "";
-		foodTruck['contentString'] 	= "<b>" + value.applicant + "<br>" +value.address + "</b><br>" + "<br><b>Status:</b> " + value.status + "<br><b>Food items:</b> " + value.fooditems;
+
+		foodTruck['contentString'] 	= "<b>" + value.applicant + "</b><br>" + value.address + "<br><b>Status:</b> " + value.status + "<br><b>Food items:</b> " + value.fooditems;
 		
 		return foodTruck;
+	}
+
+	function setUserLocation()
+	{	
+		if(navigator.geolocation) 
+		{
+			navigator.geolocation.getCurrentPosition
+			(
+				function(position) 
+				{
+					myLatLng = new google.maps.LatLng(position.coords.latitude,
+		            			                      position.coords.longitude);
+					var marker = new google.maps.Marker({
+						  			 position: myLatLng,
+						  			 map: map,
+						  			 title: "user Location",
+						  			 icon: "http://www.google.com/mapfiles/arrow.png"
+									 });
+				}, 
+				function() 
+				{
+		  			console.log('Error: The Geolocation service failed.');
+				}
+			);
+		} 
+		else 
+		{
+			console.log('Error: Your browser doesn\'t support geolocation. Please enable geolocation if possible.');
+		} 
 	}
 	
 	function populateAutoCompleteArray(foodTruck)
