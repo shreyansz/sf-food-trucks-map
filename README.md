@@ -16,6 +16,7 @@ Path: all (615) > coffee (89) > cookies (48) > muffins (22)
 ```
 Path: all (615) > coffee (89)
 ```
+- An item already searched would not show up in subsequent suggestions, i.e. one item can show up only once in the path.
 - The reset button will take the application back to its original state.
 ```
 Path: all (615)
