@@ -14,6 +14,7 @@ function main()
 	var pathCount = 0;
 	var truckCount = 0;
 	var myLatLng;
+	var pathArr = [];
 	//get JSON data
 	$.getJSON(url, function(data_json)
 	{ 
@@ -103,12 +104,8 @@ function main()
 	{
 		if(idNum != pathCount)
 		{
-			var pathArr = [];
-			for(var i1 = 1; i1 <= idNum; i1++)
-			{
-				var id = "#path" + i1;
-				pathArr.push( $(id).text() );
-			}
+			var pathArrTemp = pathArr;
+			pathArr = [];
 			$("#path").empty();
 			pathCount = 0;
 			$("#autocomp").val("");
@@ -117,22 +114,24 @@ function main()
 			for(var i2 = 1; i2 <= idNum; i2++)
 			{
 				var id = "#path" + i2;
-				$("#autocomp").val(pathArr[i2-1]);
+				$("#autocomp").val(pathArrTemp[i2-1]);
 				setLink();
 			}
 		}
 	}
-	
+		
 	function setLink()
 	{
+		var linkName = $("#autocomp").val();
+		pathArr.push(linkName);
 		populateMap();
 		var idLink = "path" + ++pathCount; 
-		$("#path").append(" > <a id='" + idLink + "' href='#'>" + $("#autocomp").val() + "</a> (" + truckCount +")");
+		$("#path").append(" > <a id='" + idLink + "' href='#'>" + linkName + "</a> (" + truckCount +")");
 		idLink = "#" + idLink;
 		$(idLink).click( function(e){
-		e.preventDefault();
-		returnToClickedState(idLink.substr(idLink.length - 1));
-		return false;
+			e.preventDefault();
+			returnToClickedState(idLink.substr(idLink.length - 1));
+			return false;
 		});
 	}
 	
@@ -200,17 +199,17 @@ function main()
 	
 	function populateAutoCompleteArray(foodTruck)
 	{  	
-		if( $.inArray(foodTruck.applicant, autoCompleteArray) < 0 )
-			{	
-				autoCompleteArray.push(foodTruck.applicant);
-			}
-			$.each(foodTruck.foodItemsArray, function(foodItemIndex, foodItem)
+		if( ( $.inArray(foodTruck.applicant, autoCompleteArray) < 0 ) && ( $.inArray(foodTruck.applicant, pathArr) < 0 ) )
+		{	
+			autoCompleteArray.push(foodTruck.applicant);
+		}
+		$.each(foodTruck.foodItemsArray, function(foodItemIndex, foodItem)
+		{
+			if( ( $.inArray(foodItem, autoCompleteArray) < 0 ) && ( $.inArray(foodItem, pathArr) < 0 ) )
 			{
-				if( $.inArray(foodItem, autoCompleteArray) < 0 )
-				{
-					autoCompleteArray.push(foodItem);
-				}
-			});
+				autoCompleteArray.push(foodItem);
+			}
+		});
 	}
 }
 $("#reset").on("click", main);
