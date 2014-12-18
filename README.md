@@ -1,6 +1,5 @@
 # SF Food Trucks Map
 SF Food Trucks Map is a web application that marks various food truck locations in San Francisco using data provided by [DataSF]. It also provides an autocomplete text box which enables user to filter results based on food truck applicant name or food items.<br>
-This solution is a bit different from [Uber coding challenge], in that, it does not map food trucks near a specific location, but rather maps all food trucks in the city using data provided by [DataSF]. Although, user location is marked, food truck locations were not provided based on that since the user might be outside San Francisco and the application receives information only for SF food trucks. Food trucks nearest to user location or input address is set as future scope since it requires address validation and distance calculation. It does however, have an option to filter results based on food truck aplicant's name or food items.  
 ### Version
 1.0.0
 ### Features
